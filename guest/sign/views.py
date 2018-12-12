@@ -81,7 +81,7 @@ def sign_index_action(request,eid):
         return render(request,'sign_index.html',{'event':event,'hint':'user is sign'})
     else:
         result.update(sign=1)
-        return render(request,'sign_index.html',{'event':event,'hint':'sign success','guest_list':result})
+        return render(request,'sign_index.html',{'event':event,'hint':'sign success','guest_list':result[0]})
 
 @login_required 
 def logout(request):
