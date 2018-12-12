@@ -1,0 +1,76 @@
+<html lang="zh-CN">
+    <head>
+        {% load bootstrap3 %}
+        {% bootstrap_css %}
+        <title>Guest Manage</title>
+    </head>
+    <body role="document">
+            <!-- 导航栏 -->
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/event_manage/">Guest Manage System</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/event_manage/">发布会</a></li>
+                            <li><a href="/guest_manage/">嘉宾</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">{{user}}</a></li>
+                            <li><a href="/logout/">退出</a></li>
+                        </ul>
+                    </div>
+                </div>  
+            </nav>
+            <!-- 搜索栏 -->
+            <div style="padding-top:60px;" class="page-header">
+                <div id="navbar" class="navbar-collapse collapse">
+                    <form class="navbar-form" method="get" action="/search_realname/">
+                        <div class="form-group">
+                                <input name="name" type="text" placeholder="输入姓名" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-success">搜索</button>
+                    </form>
+                </div>
+            </div>
+            <!-- 发布会表单 -->
+            <div class="row" style="padding-top: 60px;">
+                <div class="col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>id</th><th>姓名</th><th>手机</th><th>签到</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for guest in guest_list %}
+                              <tr>
+                                  <td>{{ guest.id }}</td>
+                                  <td>{{ guest.realname }}</td>
+                                  <td>{{ guest.phone }}</td>
+                                  <td>{{ guest.sign }}</td>
+                                  {% empty %}
+                                  <td>暂无人员</td>
+                              </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- 分页 -->
+            <div class="paginator">
+                <span class="step-links">
+                    {% if guest_list.has_previous %}
+                    <a href="?page={{ guest_list.previous_page_number }}">上一页</a>
+                    {% endif %}
+                    <span class="current">
+                        page {{ guest_list.number }} of {{ guest_list.paginator.num_pages }}
+                    </span>
+                    {% if guest_list.has_next %}
+                      <a href="?page={{ guest_list.next_page_number }}">下一页</a>
+                    {% endif %}
+                </span>
+            </div>
+        </body>
+</html>
