@@ -71,14 +71,13 @@ def sign_index_action(request,eid):
     event = get_object_or_404(Event,id=eid)
     phone = request.POST.get('phone','')
     result = Guest.objects.filter(phone=phone)
-    print(result)
     if not result:
         return render(request,'sign_index.html',{'event':event,'hint':'phone erro'})
     result = Guest.objects.filter(phone=phone,event_id=eid)
     if not result:
         return render(request,'sign_index.html',{'event':event,'hint':'phone or event_id erro'})
     result = Guest.objects.filter(phone=phone,event_id=eid)
-    if result.sign:
+    if result[0].sign:
         return render(request,'sign_index.html',{'event':event,'hint':'user is sign'})
     else:
         result.update(sign=1)

@@ -22,6 +22,7 @@
     <div class="page-header" style="padding-top: 80px;">
             <div class="navbar-collapse collapse" id="nvabar">
                 <form class="navbar-form" method="post" action="/sign_index_action/{{ event.id }}/">
+                    {% csrf_token %}
                     <div class="form-group">
                         <input name="phone" type="text" placeholder="请输入手机号" class="form-control">
                     </div>
