@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,re_path
-from django.conf.urls import url
-from sign import views
+from django.conf.urls import url,include
+from sign import views,urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^index/$',views.index),
@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^sign_index/(?P<eid>[0-9]+)/$',views.sign_index),
     re_path(r'^sign_index_action/(?P<eid>[0-9]+)/$',views.sign_index_action),
     url(r'^logout/$',views.logout),
+    url(r'^api/',include('sign.urls',namespace="sign")),
 ]
