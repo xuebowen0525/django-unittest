@@ -20,13 +20,12 @@ class Event(models.Model):
 
 #嘉宾表
 class Guest(models.Model):
-    event = models.ForeignKey(Event,on_delete=True)
+    event = models.ForeignKey(Event,on_delete=models.SET_NULL,null=True,blank=True)
     realname = models.CharField(max_length=64)
     phone = models.CharField(max_length=16)
     # email = models.EmailField()
     sign = models.BooleanField()
     creat_time = models.DateTimeField(auto_now=True)
-
     class Meta:
         #联合唯一unique_together
         unique_together = ("event","phone")

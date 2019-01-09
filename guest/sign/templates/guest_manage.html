@@ -32,6 +32,8 @@
                         </div>
                         <button type="submit" class="btn btn-success">搜索</button>
                     </form>
+                    <a href="/add_guest/"  target="/add_guest/_blank"><button class="btn btn-primary">增加</button></a>
+                    <span>{{ erro }}</span>
                 </div>
             </div>
             <!-- 发布会表单 -->
@@ -40,16 +42,22 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>id</th><th>姓名</th><th>手机</th><th>签到</th>
+                                <th>序号</th><th>guest_id</th><th>姓名</th><th>手机</th><th>参加的发布会</th><th>签到</th><th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for guest in guest_list %}
                               <tr>
+                                  <td>{{ forloop.counter }}</td>
                                   <td>{{ guest.id }}</td>
                                   <td>{{ guest.realname }}</td>
                                   <td>{{ guest.phone }}</td>
+                                  <td>{{ guest.event }}</td>
                                   <td>{{ guest.sign }}</td>
+                                  <td>
+                                    <a href="/del_guest/?guest_id={{ guest.id }}"><button class="btn btn-primary">删除</button></a>
+                                    <a href="/change_sign/?guest_id={{ guest.id }}"><button class="btn btn-primary" >签到</button></a>
+                                  </td>
                                   {% empty %}
                                   <td>暂无人员</td>
                               </tr>
@@ -73,4 +81,6 @@
                 </span>
             </div>
         </body>
-</html>
+        <script>
+        </script>
+</html> 

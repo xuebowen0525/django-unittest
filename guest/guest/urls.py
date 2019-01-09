@@ -31,4 +31,10 @@ urlpatterns = [
     re_path(r'^sign_index_action/(?P<eid>[0-9]+)/$',views.sign_index_action),
     url(r'^logout/$',views.logout),
     url(r'^api/',include('sign.urls',namespace="sign")),
+    url(r'^change_event/(?P<eid>[0-9]+)/$',views.change_event),
+    url(r'^add_event/$',views.add_event),
+    url(r'^del_event/$',views.del_event),
+    url(r'^add_guest/$',views.add_guest),
+    url(r'^del_guest/$',views.del_guest),
+    url(r'^change_sign/$',views.change_sign),
 ]

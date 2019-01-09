@@ -32,6 +32,7 @@
                     </div>
                     <button type="submit" class="btn btn-success">搜索</button>
                 </form>
+                <button><a href="/add_event/" target="/add_event/_blank">增加</a></button>
             </div>
         </div>
         <!-- 发布会表单 -->
@@ -40,12 +41,13 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>id</th><th>名称</th><th>状态</th><th>地址</th><th>时间</th><th>签到</th>
+                            <th>序号</th><th>event_id</th><th>名称</th><th>状态</th><th>地址</th><th>时间</th><th>签到</th><th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for event in event_list %}
                           <tr>
+                              <td>{{ forloop.counter }}</td>
                               <td>{{ event.id }}</td>
                               <td>{{ event.name }}</td>
                               <td>{{ event.status }}</td>
@@ -53,7 +55,11 @@
                               <td>{{ event.start_time }}</td>
                               <td>
                                   <!-- target规定在何处打开链接 _blank新打开一个窗口 -->
-                                  <a href="/sign_index/{{ event.id }}" target="{{ event.id }}_blank">签到</a>
+                                  <a href="/sign_index/{{ event.id }}" target="{{ event.id }}_blank"><button class="btn btn-primary">签到</button></a>
+                              </td>
+                              <td>
+                                <a href="/change_event/{{ event.id }}" target="{{ event.id }}_blank"><button class="btn btn-primary">修改</button></a>
+                                <a href="/del_event/?id={{ event.id }}" ><button class="btn btn-primary">删除</button></a>
                               </td>
                               {% empty %}
                               <td>暂无发布会内容</td>
